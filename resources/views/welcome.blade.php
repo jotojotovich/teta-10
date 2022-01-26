@@ -61,20 +61,28 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .is_registered{
+              text-align: center;
+              margin-top: 50px;
+              font-size: 1.5em;
+              color: lawngreen;
+              font-weight: 600;
+            }
         </style>
     </head>
     <body>
+        
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        @if (Route::has('register'))
+                          <a href="{{ route('register') }}">Register</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
                     @endauth
                 </div>
             @endif
@@ -94,6 +102,11 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                @if (session()->has('success'))
+                  <div class="alert alert-success is_registered">
+                    {{ session('success') }}
+                  </div>
+                @endif
             </div>
         </div>
     </body>
